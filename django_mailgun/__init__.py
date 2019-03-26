@@ -3,10 +3,7 @@ from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from io import StringIO
 
 class MailgunAPIError(Exception):
     pass
@@ -17,7 +14,7 @@ class MailgunBackend(BaseEmailBackend):
 
     def __init__(self, fail_silently=False, *args, **kwargs):
         super(MailgunBackend, self).__init__(
-                        fail_silently=fail_silently, 
+                        fail_silently=fail_silently,
                         *args, **kwargs)
 
         try:
